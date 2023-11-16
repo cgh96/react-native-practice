@@ -1,5 +1,5 @@
-import FirstChapter from "./practice/FirstChapter";
+import SecondChapter from "./practice/SecondChapter";
 
 export default function App() {
-  return <FirstChapter />;
+  return <SecondChapter />;
 }
