@@ -1,30 +1,39 @@
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import { StyleSheet, View, TextInput, Button, Modal } from "react-native";
 
 function Input({
   addTodoHandler,
   todoInputHandler,
   removeAllTodoHandler,
+  cancelAddGoalHandler,
   todo,
+  modalVisible,
 }) {
   return (
-    <View style={styles.inputOuterContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Your New Todo!"
-          onChangeText={todoInputHandler}
-          value={todo}
-        />
-        <Button title="Add Todo" onPress={addTodoHandler} />
+    <Modal visible={modalVisible} animationType="slide">
+      <View style={styles.inputOuterContainer}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Your New Todo!"
+            onChangeText={todoInputHandler}
+            value={todo}
+          />
+          <Button title="Add Todo" onPress={addTodoHandler} />
+        </View>
+        <View style={styles.utilBtnContainer}>
+          <Button
+            title="Remove All"
+            onPress={removeAllTodoHandler}
+            color="coral"
+          />
+          <Button
+            title="Cancel"
+            color="darkgray"
+            onPress={cancelAddGoalHandler}
+          />
+        </View>
       </View>
-      <View style={styles.removeBtnContainer}>
-        <Button
-          title="Remove All"
-          onPress={removeAllTodoHandler}
-          color="coral"
-        />
-      </View>
-    </View>
+    </Modal>
   );
 }
 
@@ -34,7 +43,7 @@ const styles = StyleSheet.create({
   inputOuterContainer: {
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
-    paddingBottom: 15,
+    padding: 10,
   },
   inputContainer: {
     flexDirection: "row",
@@ -50,8 +59,11 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 8,
   },
-  removeBtnContainer: {
+  utilBtnContainer: {
+    padding: 10,
     borderRadius: 6,
     overflow: "hidden",
+    justifyContent: "space-between",
+    gap: 10,
   },
 });

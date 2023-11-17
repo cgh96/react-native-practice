@@ -5,8 +5,17 @@ import Input from "./Input";
 import List from "./List";
 
 function TodoList() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [todoList, setTodoList] = useState([]);
   const [todo, setTodo] = useState("");
+
+  const startAddGoalHandler = () => {
+    setModalIsVisible(true);
+  };
+
+  const cancelAddGoalHandler = () => {
+    setModalIsVisible(false);
+  };
 
   const todoInputHandler = (newTodo) => {
     setTodo(newTodo);
@@ -21,16 +30,27 @@ function TodoList() {
   const removeAllTodoHandler = () => {
     setTodoList([]);
   };
+  const removeTodoHandler = (id) => {
+    const newTodoList = todoList.filter((todo) => todo.id !== id);
+    setTodoList(newTodoList);
+  };
 
   return (
     <View style={styles.appContainer}>
+      <Button
+        title="add New Goal"
+        color="#5e0acc"
+        onPress={startAddGoalHandler}
+      />
       <Input
+        cancelAddGoalHandler={cancelAddGoalHandler}
+        modalVisible={modalIsVisible}
         removeAllTodoHandler={removeAllTodoHandler}
         addTodoHandler={addTodoHandler}
         todoInputHandler={todoInputHandler}
         todo={todo}
       />
-      <List todoList={todoList} />
+      <List todoList={todoList} onDeleteItem={removeTodoHandler} />
     </View>
   );
 }

@@ -1,6 +1,6 @@
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import { View, StyleSheet, Text, FlatList, Pressable } from "react-native";
 
-function List({ todoList }) {
+function List({ todoList, onDeleteItem }) {
   return (
     <View style={styles.listContainer}>
       <FlatList
@@ -11,7 +11,13 @@ function List({ todoList }) {
         renderItem={(todo) => {
           return (
             <View style={styles.todoItem}>
-              <Text style={styles.todoColor}>{todo.item.text}</Text>
+              <Pressable
+                android_ripple={{ color: "#59aacc" }}
+                onPress={() => onDeleteItem(todo.item.id)}
+                style={({ pressed }) => pressed && styles.pressedItem}
+              >
+                <Text style={styles.todoColor}>{todo.item.text}</Text>
+              </Pressable>
             </View>
           );
         }}
@@ -25,12 +31,16 @@ export default List;
 const styles = StyleSheet.create({
   listContainer: {
     paddingTop: 8,
+    flex: 4,
   },
   emptyItem: {
     margin: 8,
     padding: 8,
     borderRadius: 6,
     backgroundColor: "gray",
+  },
+  pressedItem: {
+    opacity: 0.5,
   },
   todoItem: {
     margin: 8,
