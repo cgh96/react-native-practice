@@ -1,5 +1,5 @@
-import SecondChapter from "./practice/SecondChapter";
+import TodoList from "./TodoList";
 
 export default function App() {
-  return <SecondChapter />;
+  return <TodoList />;
 }
