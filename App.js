@@ -1,5 +1,5 @@
-import TodoList from "./TodoList";
+import Game from "./Game/screens";
 
 export default function App() {
-  return <TodoList />;
+  return <Game />;
 }
